@@ -1,5 +1,6 @@
 {
     "name": "chayka/helpers",
+    "type": "library",
     "description": "Chayka Helpers set",
     "minimum-stability": "dev",
     "license": "MIT",
