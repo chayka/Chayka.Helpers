@@ -12,7 +12,7 @@
     ],
     "autoload": {
         "PSR-4": {
-            "Chayka\\": "src/Chayka/"
+            "Chayka\\Helpers\\": "src/Chayka/Helpers/"
         }
     },
     "require-dev": {
