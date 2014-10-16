@@ -109,10 +109,6 @@ class JsonHelper {
         HttpHeaderHelper::setResponseCode($httpResponseCode);
         $count = count($errors);
         if($count){
-            if(1 == $count){
-                $key = key($errors);
-                self::respondError($errors[$key], $key, $payload, $httpResponseCode);
-            }
             self::respond($payload, 'mass_errors', $errors);
         }
         self::respond($payload, 1, '');
