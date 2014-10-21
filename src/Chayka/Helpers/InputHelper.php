@@ -81,13 +81,16 @@ class InputHelper {
      * Filter $value (trim, strip_slashes, strip_tags).
      * If $key is in array of html allowed params, then tags won't be stripped
      *
-     * @param string $value
+     * @param string|array|object $value
      * @param string $key
-     * @return string
+     * @return string|array
      */
     public static function filter($value, $key = ''){
         if(is_array($value)){
             return self::filterArray($value);
+        }
+        if(is_object($value)){
+            return self::filterArray(get_object_vars($value));
         }
         if(!in_array($key, self::$htmlAllowed)){
             $filter = FILTER_SANITIZE_STRING;
@@ -96,17 +99,47 @@ class InputHelper {
         }
         return rtrim(stripslashes($value));
     }
+
     /**
      * Filter $values (trim, strip_slashes, strip_tags).
      *
      * @param array(string) $values
-     * @return string
+     * @return array(string)
      */
     public static function filterArray($values){
         foreach($values as $k=>$v){
             $values[$k] = self::filter($v, $k);
         }
         return $values;
+    }
+
+    /**
+     * Capture request from "php://input" and return as an assoc array
+     *
+     * @return array
+     */
+    public static function captureInput(){
+        $fp = fopen("php://input", "r");
+        $req = '';
+        while($data = fread($fp, 1024)){
+            $req.=$data;
+        }
+        fclose($fp);
+        $params = array();
+        if($req){
+            $params = json_decode($req, true);
+            if(!$params){
+                parse_str($req, $params);
+            }
+            if($params){
+                foreach($params as $key=>$value){
+                    self::setParam($key, $value);
+                }
+            }
+        }
+
+        return self::filter($params);
+
     }
 
     /**
