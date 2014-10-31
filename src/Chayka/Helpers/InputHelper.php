@@ -50,7 +50,7 @@ class InputHelper {
      *
      * @param $param
      * @param string $default
-     * @return string
+     * @return mixed
      */
     public static function getParam($param, $default = '') {
         $value = Util::getItem(self::$input?self::$input:$_REQUEST, $param, $default);
