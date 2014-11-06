@@ -64,21 +64,23 @@ class JsonHelper {
     public static function respond($payload = '', $code = 0, $message = '') {
         return die(self::packResponse($payload, $code, $message));
     }
-    
+
     /**
      * Wrap Exception into {'payload': ..., 'code': ..., 'message': ...} envelope.
      * Set http response code to 500.
      * And then die() it.
      *
      * @param \Exception $e
+     * @param string $code
      */
-    public static function respondException( $e){
+    public static function respondException($e, $code = ''){
         HttpHeaderHelper::setResponseCode(500);
         self::respond(array(
             'file'=>$e->getFile(),
             'line'=>$e->getLine(),
             'trace'=>$e->getTrace(),
-        ), $e->getCode(), $e->getMessage());
+            'code' => $e->getCode(),
+        ), $code ? $code :$e->getCode(), $e->getMessage());
     }
 
     /**

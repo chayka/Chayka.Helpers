@@ -122,31 +122,33 @@ class NlsHelper {
      * @param $module
      */
     public static function load($module) {
-        $nlsDir = static::getBaseDir().static::getNlsDir();
-        $langDir = $nlsDir.self::getLang().'/';
-        $defLangDir = $nlsDir.'_/';
-        if(is_dir($defLangDir)){
-            if(!is_dir($langDir)){
-                $langDir = $defLangDir;
+        if(empty(self::$dictionary[$module])){
+            $nlsDir = static::getBaseDir().static::getNlsDir();
+            $langDir = $nlsDir.self::getLang().'/';
+            $defLangDir = $nlsDir.'_/';
+            if(is_dir($defLangDir)){
+                if(!is_dir($langDir)){
+                    $langDir = $defLangDir;
+                }
+                $fn = $langDir.str_replace('/', DIRECTORY_SEPARATOR, $module).'.php';
+                if(file_exists($fn)){
+                    self::$dictionary[$module] = require($fn);
+                }
+            }else{
+                $fnBase = $nlsDir.str_replace('/', DIRECTORY_SEPARATOR, $module).'.';
+                $fn = '';
+                if(file_exists($fnBase.self::getLang().'.php')){
+                    $fn = $fnBase.self::getLang().'.php';
+                }else if(file_exists($fnBase.'_.php')){
+                    $fn = $fnBase.'_.php';
+                }else if(file_exists($fnBase.'php')) {
+                    $fn = $fnBase . 'php';
+                }
+                if($fn){
+                    self::$dictionary[$module] = require($fn);
+                }
             }
-            $fn = $langDir.str_replace('/', DIRECTORY_SEPARATOR, $module).'.php';
-            if(file_exists($fn)){
-                self::$dictionary[$module] = require($fn);
-            }
-        }else{
-            $fnBase = $nlsDir.str_replace('/', DIRECTORY_SEPARATOR, $module).'.';
-            $fn = '';
-            if(file_exists($fnBase.self::getLang().'.php')){
-                $fn = $fnBase.self::getLang().'.php';
-            }else if(file_exists($fnBase.'_.php')){
-                $fn = $fnBase.'_.php';
-            }else if(file_exists($fnBase.'php')) {
-                $fn = $fnBase . 'php';
-            }
-            if($fn){
-//                echo $fn;
-                self::$dictionary[$module] = require($fn);
-            }
+
         }
     }
 
