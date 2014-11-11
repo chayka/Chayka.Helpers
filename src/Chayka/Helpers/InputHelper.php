@@ -144,13 +144,16 @@ class InputHelper {
 
     /**
      * Setup input param validation using InputValidation
+     * If validation should be performed only if some condition met,
+     * setup 2nd param.
      *
      * @param string $key param name
+     * @param bool $needValidate
      * @return InputValidation;
      */
-    public static function checkParam($key){
+    public static function checkParam($key, $needValidate = true){
         if(!isset(self::$validation[$key])){
-            self::$validation[$key] = new InputValidation();
+            self::$validation[$key] = new InputValidation($key, $needValidate);
         }
         return self::$validation[$key];
     }
@@ -195,7 +198,29 @@ class InputHelper {
 
 class InputValidation{
 
+    /**
+     * Param name
+     * @var string
+     */
+    protected $param;
+
+    /**
+     * Set this flag to false if this field should not be validated
+     * @var bool
+     */
+    protected $needValidate = true;
+
+    /**
+     * Array of checks
+     * @var array
+     */
     protected $checks = array();
+
+    function __construct($param, $needValidate = true) {
+        $this->param = $param;
+        $this->needValidate = $needValidate;
+    }
+
 
     /**
      * Setup param check
@@ -493,6 +518,9 @@ class InputValidation{
      * @return string|false
      */
     public function invalid($value){
+        if(!$this->needValidate){
+            return false;
+        }
         if(isset($this->checks['required'])){
             $message = $this->getCheckParam('required', 'message');
             $error = self::invalidRequired($value, $message);
@@ -551,6 +579,20 @@ class InputValidation{
         }
 
         return false;
+    }
+
+    /**
+     * Get param value.
+     * Use it like that:
+     *
+     * $someVar = InputHelper::checkParam('some_var')->required('Please set some var')->getValue();
+     *
+     * @param string $default
+     * @return mixed|string
+     */
+    public function getValue($default = ''){
+        $value = InputHelper::getParam($this->param, $default);
+        return $this->invalid($value)? $default : $value;
     }
 
 }
