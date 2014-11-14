@@ -27,10 +27,17 @@ class JsonHelper {
             foreach ($obj as $key => $val) {
                 $obj[$key] = self::packObject($val);
             }
-        }elseif ($obj instanceof JsonReady) {
+        } elseif ($obj instanceof JsonReady) {
             return $obj->packJsonItem();
         } elseif ($obj instanceof \DateTime) {
             return DateHelper::datetimeToJsonStr($obj);
+        } elseif ($obj instanceof \Exception) {
+            return array(
+                'file'=>$obj->getFile(),
+                'line'=>$obj->getLine(),
+                'trace'=>$obj->getTrace(),
+                'code' => $obj->getCode(),
+            );
         }
 
         return $obj;
@@ -75,12 +82,7 @@ class JsonHelper {
      */
     public static function respondException($e, $code = ''){
         HttpHeaderHelper::setResponseCode(500);
-        self::respond(array(
-            'file'=>$e->getFile(),
-            'line'=>$e->getLine(),
-            'trace'=>$e->getTrace(),
-            'code' => $e->getCode(),
-        ), $code ? $code :$e->getCode(), $e->getMessage());
+        self::respond($e, $code ? $code :$e->getCode(), $e->getMessage());
     }
 
     /**
