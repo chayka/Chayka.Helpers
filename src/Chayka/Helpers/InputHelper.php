@@ -46,6 +46,17 @@ class InputHelper {
     }
 
     /**
+     * Inject input params to current input buffer
+     *
+     * @param array $params
+     */
+    public static function setParams($params){
+        foreach($params as $key => $value){
+            self::setParam($key, $value);
+        }
+    }
+
+    /**
      * Get filtered param value from current input buffer
      *
      * @param $param
