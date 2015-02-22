@@ -111,7 +111,7 @@ class NlsHelper {
      *     auth.php
      *   en/
      *     auth.php
-     * 2. Split by extentsion prefix
+     * 2. Split by extension prefix
      * nls/
      *   auth.php
      *   auth._.php

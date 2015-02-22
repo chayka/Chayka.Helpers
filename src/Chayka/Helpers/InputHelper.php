@@ -70,7 +70,7 @@ class InputHelper {
 
     /**
      * Get assoc array of filtered values from current input buffer.
-     * If $omitStandard then 'controller', 'action', 'module' will be omited
+     * If $omitStandard then 'controller', 'action', 'module' will be omitted
      *
      * @param bool $omitStandard
      * @return array
