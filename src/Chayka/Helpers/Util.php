@@ -15,7 +15,10 @@ class Util {
     public static function getItem($data, $key, $defaultValue = "") {
         $value = $defaultValue;
         if (is_object($data)) {
-            $data = get_object_vars($data);
+//            $data = get_object_vars($data);
+	        if(isset($data->$key)){
+		        $value = $data->$key;
+	        }
         }
         if (is_array($data)) {
             if (isset($data[$key])) {
