@@ -23,11 +23,7 @@ class JsonHelper {
      * @return array|string
      */
     public static function packObject($obj) {
-        if (is_array($obj)) {
-            foreach ($obj as $key => $val) {
-                $obj[$key] = self::packObject($val);
-            }
-        } elseif ($obj instanceof JsonReady) {
+        if ($obj instanceof JsonReady) {
             return $obj->packJsonItem();
         } elseif ($obj instanceof \DateTime) {
             return DateHelper::datetimeToJsonStr($obj);
@@ -39,7 +35,14 @@ class JsonHelper {
                 'code' => $obj->getCode(),
             );
         }
-
+	    if (is_object($obj)){
+		    $obj = get_object_vars($obj);
+	    }
+	    if (is_array($obj)) {
+		    foreach ( $obj as $key => $val ) {
+			    $obj[ $key ] = self::packObject( $val );
+		    }
+	    }
         return $obj;
     }
 
