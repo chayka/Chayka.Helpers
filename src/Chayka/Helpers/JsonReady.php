@@ -11,5 +11,14 @@ namespace Chayka\Helpers {
          */
         public function packJsonItem();
 
+	    /**
+	     * Assigns inner values from the ones provided in $data
+	     *
+	     * @param $data
+	     *
+	     * @return self
+	     */
+	    public static function unpackJsonItem($data);
+
     }
 }
