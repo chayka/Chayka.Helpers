@@ -5,7 +5,8 @@ namespace Chayka\Helpers;
 class InputHelper {
 
     protected static $input;
-    protected static $htmlAllowed = array();
+	protected static $htmlAllowed = array();
+	protected static $slashesPreserved = array();
     protected static $validation = array();
     protected static $errors = array();
 
@@ -19,19 +20,31 @@ class InputHelper {
         self::$input = $input;
     }
 
-    /**
-     * Define input params that are allowed to contain HTML
-     *
-     * @param string/array $htmlAllowed 'post_content, comment_content' or ['post_content', 'comment_content']
-     */
-    public static function permitHtml($htmlAllowed){
-        if(is_string($htmlAllowed)){
-            $htmlAllowed = preg_split('%\s*,\s*%', $htmlAllowed);
-        }
-        self::$htmlAllowed = array_merge(self::$htmlAllowed, $htmlAllowed);
-    }
+	/**
+	 * Define input params that are allowed to contain HTML
+	 *
+	 * @param string/array $htmlAllowed 'post_content, comment_content' or ['post_content', 'comment_content']
+	 */
+	public static function permitHtml($htmlAllowed){
+		if(is_string($htmlAllowed)){
+			$htmlAllowed = preg_split('%\s*,\s*%', $htmlAllowed);
+		}
+		self::$htmlAllowed = array_merge(self::$htmlAllowed, $htmlAllowed);
+	}
 
-    /**
+	/**
+	 * Define input params that should preserve slashes
+	 *
+	 * @param string/array $htmlAllowed 'post_content, comment_content' or ['post_content', 'comment_content']
+	 */
+	public static function preserveSlashes($slashesPreserved){
+		if(is_string($slashesPreserved)){
+			$slashesPreserved = preg_split('%\s*,\s*%', $slashesPreserved);
+		}
+		self::$slashesPreserved = array_merge(self::$slashesPreserved, $slashesPreserved);
+	}
+
+	/**
      * Inject input param value to current input buffer
      *
      * @param $param
@@ -108,7 +121,7 @@ class InputHelper {
             $options = FILTER_FLAG_NO_ENCODE_QUOTES;
             $value = filter_var($value, $filter, $options);
         }
-        return rtrim(stripslashes($value));
+	    return in_array($key, self::$slashesPreserved)? rtrim($value) : rtrim(stripslashes($value));
     }
 
     /**
