@@ -1,13 +1,53 @@
 <?php
+/**
+ * Chayka.Framework is a framework that enables WordPress development in a MVC/OOP way.
+ *
+ * More info: https://github.com/chayka/Chayka.Framework
+ */
 
 namespace Chayka\Helpers;
 
+/**
+ * Class InputHelper contains a set of methods to filter and validate user input from HTTP request.
+ *
+ * @package Chayka\Helpers
+ */
 class InputHelper {
 
+    /**
+     * Unfiltered input hash map
+     *
+     * @var array
+     */
     protected static $input;
+
+    /**
+     * Array of param names that are allowed to contain HTML code
+     *
+     * @var array
+     */
 	protected static $htmlAllowed = array();
+
+    /**
+     * Array of param names that should preserve slashes.
+     * No stripslashes performed on those params.
+     *
+     * @var array
+     */
 	protected static $slashesPreserved = array();
+
+    /**
+     * Hash map of param validation objects.
+     *
+     * @var array
+     */
     protected static $validation = array();
+
+    /**
+     * Hash map of param validation errors.
+     *
+     * @var array
+     */
     protected static $errors = array();
 
     /**
@@ -202,6 +242,13 @@ class InputHelper {
         return true;
     }
 
+    /**
+     * Perform bulk validation. If $respondErrors then output errors in json
+     *
+     * @param bool|false $respondErrors
+     *
+     * @return bool
+     */
     public static function validateInput($respondErrors = false){
         $valid = true;
         foreach(self::$validation as $param=>$validation){
@@ -215,11 +262,25 @@ class InputHelper {
         return $valid;
     }
 
+    /**
+     * Get validation errors organized py param name.
+     * Validation should be performed beforehand.
+     *
+     * @return array
+     */
     public static function getValidationErrors(){
         return self::$errors;
     }
 }
 
+/**
+ * Class InputValidation is responsible for param validation.
+ * Can be used in a chained manner:
+ * $param1 = InputHelper::checkParam('param1')->required('This param is required')->email('Invalid email')->getValue();
+ * InputHelper::validateInput();
+ *
+ * @package Chayka\Helpers
+ */
 class InputValidation{
 
     /**
@@ -240,6 +301,12 @@ class InputValidation{
      */
     protected $checks = array();
 
+    /**
+     * Constructor
+     *
+     * @param string $param
+     * @param bool|true $needValidate
+     */
     function __construct($param, $needValidate = true) {
         $this->param = $param;
         $this->needValidate = $needValidate;
@@ -301,9 +368,9 @@ class InputValidation{
     /**
      * Setup input param length validation
      *
-     * @param $message
      * @param int $min
      * @param int $max
+     * @param $message
      * @return InputValidation
      */
     public function length($min = 0, $max = 0, $message = ''){

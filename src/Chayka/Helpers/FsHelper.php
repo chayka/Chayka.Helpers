@@ -1,7 +1,17 @@
 <?php
+/**
+ * Chayka.Framework is a framework that enables WordPress development in a MVC/OOP way.
+ *
+ * More info: https://github.com/chayka/Chayka.Framework
+ */
 
 namespace Chayka\Helpers;
 
+/**
+ * Class FsHelper contains a set of handy methods for file system operations.
+ *
+ * @package Chayka\Helpers
+ */
 class FsHelper {
 
     /**

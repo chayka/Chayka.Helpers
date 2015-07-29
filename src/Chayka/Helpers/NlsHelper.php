@@ -1,21 +1,53 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: borismossounov
- * Date: 30.10.14
- * Time: 18:28
+ * Chayka.Framework is a framework that enables WordPress development in a MVC/OOP way.
+ *
+ * More info: https://github.com/chayka/Chayka.Framework
  */
 
 namespace Chayka\Helpers;
 
 use \Locale;
 
+/**
+ * Class NlsHelper provides mechanism for National Language Support.
+ *
+ * @package Chayka\Helpers
+ */
 class NlsHelper {
 
+    /**
+     * Hash map for translations
+     *
+     * @var array
+     */
     protected static $dictionary = array();
+
+    /**
+     * Locale identifier string
+     *
+     * @var string
+     */
     protected static $locale;
+
+    /**
+     * Language code
+     *
+     * @var string
+     */
     protected static $lang;
+
+    /**
+     * Project base directory
+     *
+     * @var string
+     */
     protected static $baseDir;
+
+    /**
+     * Project subdirectory containing dictionaries
+     * @var string
+     */
     protected static $nlsDir = 'app/nls/';
 //    protected static $resDir = 'res/';
 

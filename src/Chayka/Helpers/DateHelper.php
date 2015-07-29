@@ -1,10 +1,20 @@
 <?php
+/**
+ * Chayka.Framework is a framework that enables WordPress development in a MVC/OOP way.
+ *
+ * More info: https://github.com/chayka/Chayka.Framework
+ */
 
 namespace Chayka\Helpers;
 
 use \DateTime;
 use \DateTimeZone;
 
+/**
+ * Class DateHelper contains a set of handy methods for date formatting.
+ *
+ * @package Chayka\Helpers
+ */
 class DateHelper {
     const DB_DATETIME = 'Y-m-d H:i:s';//'yyyy-MM-dd HH:mm:ss';
     const DB_DATE = 'Y-m-d';//'yyyy-MM-dd';
@@ -14,7 +24,13 @@ class DateHelper {
     const JSON_DATE = 'Y-m-d';//'dd.MM.yyyy';
     const JSON_TIME = 'H:i:s';
 
-    static protected $storedTimezone = null;
+    /**
+     * Timezone acquired form browser and used to adjust time stored in UTC
+     * when outputting to the timezone different from server timezone.
+     *
+     * @var null|DateTimeZone
+     */
+    static protected $frontEndTimezone = null;
 
     /**
      * Convert DateTime to db date string.
@@ -218,10 +234,10 @@ class DateHelper {
      */
     public static function fixTimezone($date){
         if(isset($_SESSION['timezone'])){
-            if(!self::$storedTimezone){
-                self::$storedTimezone = new DateTimeZone(isset($_SESSION['timezone'])?$_SESSION['timezone']:'UTC');
+            if(!self::$frontEndTimezone){
+                self::$frontEndTimezone = new DateTimeZone(isset($_SESSION['timezone'])?$_SESSION['timezone']:'UTC');
             }
-            $date->setTimezone(self::$storedTimezone);
+            $date->setTimezone(self::$frontEndTimezone);
         }
         return $date;
     }

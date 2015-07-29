@@ -1,7 +1,18 @@
 <?php
+/**
+ * Chayka.Framework is a framework that enables WordPress development in a MVC/OOP way.
+ *
+ * More info: https://github.com/chayka/Chayka.Framework
+ */
 
 namespace Chayka\Helpers;
 
+/**
+ * Class CurlHelper contains a set of handy methods to perform HTTP requests.
+ * Utilizes cURL library.
+ *
+ * @package Chayka\Helpers
+ */
 class CurlHelper {
 
     /**

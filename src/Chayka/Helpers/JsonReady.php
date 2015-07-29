@@ -1,7 +1,18 @@
 <?php
+/**
+ * Chayka.Framework is a framework that enables WordPress development in a MVC/OOP way.
+ *
+ * More info: https://github.com/chayka/Chayka.Framework
+ */
 
 namespace Chayka\Helpers {
 
+    /**
+     * Interface JsonReady allows to customize json output when object is included into a payload
+     * when JsonHelper is used to perform API res
+     *
+     * @package Chayka\Helpers
+     */
     interface JsonReady {
 
         /**

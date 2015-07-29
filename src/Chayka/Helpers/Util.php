@@ -1,16 +1,26 @@
 <?php
+/**
+ * Chayka.Framework is a framework that enables WordPress development in a MVC/OOP way.
+ *
+ * More info: https://github.com/chayka/Chayka.Framework
+ */
 
 namespace Chayka\Helpers;
 
+/**
+ * Class Util contains some helper methods that are nowhere else to put, yet.
+ * @package Chayka\Helpers
+ */
 class Util {
 
     /**
      * Returns object's property or array's element by key
-     * in case of absense returns default value
-     * @var array|object data to extract element from
-     * @var string key
-     * @var mixed default value
-     * @return mixed value
+     * in case of absence returns default value
+     *
+     * @param array|object $data to extract element from
+     * @param string $key
+     * @param mixed $defaultValue
+     * @return mixed
      */
     public static function getItem($data, $key, $defaultValue = "") {
         $value = $defaultValue;
