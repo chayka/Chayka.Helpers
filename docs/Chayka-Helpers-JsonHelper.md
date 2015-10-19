@@ -119,6 +119,28 @@ And then die() it.
 
 
 
+### respondSuccess
+
+    mixed Chayka\Helpers\JsonHelper::respondSuccess(string $message, null $payload, integer $code, integer $httpResponseCode)
+
+Wrap success message into {'payload': .
+
+.., 'code': ..., 'message': ...} envelope.
+Set http response code to $httpResponseCode = 200.
+And then die() it.
+
+* Visibility: **public**
+* This method is **static**.
+
+
+#### Arguments
+* $message **string**
+* $payload **null**
+* $code **integer**
+* $httpResponseCode **integer**
+
+
+
 ### respondError
 
     mixed Chayka\Helpers\JsonHelper::respondError(string $message, integer $code, null $payload, integer $httpResponseCode)

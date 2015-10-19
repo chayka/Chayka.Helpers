@@ -108,6 +108,21 @@ class JsonHelper {
     }
 
     /**
+     * Wrap success message into {'payload': ..., 'code': ..., 'message': ...} envelope.
+     * Set http response code to $httpResponseCode = 200.
+     * And then die() it.
+     *
+     * @param string $message
+     * @param null $payload
+     * @param int $code
+     * @param int $httpResponseCode
+     */
+    public static function respondSuccess($message = '', $payload = null, $code = 0, $httpResponseCode = 200){
+        HttpHeaderHelper::setResponseCode($httpResponseCode);
+        self::respond($payload, $code, $message);
+    }
+
+    /**
      * Wrap error into {'payload': ..., 'code': ..., 'message': ...} envelope.
      * Set http response code to $httpResponseCode = 400.
      * And then die() it.
