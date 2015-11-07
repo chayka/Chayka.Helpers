@@ -242,4 +242,26 @@ class DateHelper {
         return $date;
     }
 
+    /**
+     * Output timestamp got from microtime(true)
+     * Using format from http://php.net/manual/ru/function.date.php
+     * u - microseconds
+     * z - milliseconds
+     *
+     * @param $microTime
+     * @param $format
+     *
+     * @return string
+     */
+    public static function microTimeToStr($microTime, $format){
+        $unix = (int)$microTime;
+        $micro = $microTime - floor($microTime);
+        $micro = (int)($micro * 1E6);
+        $milli = (int)($micro * 1E3);
+
+        $format = str_replace(array('u', 'z'), array(sprintf('%06d', $micro), sprintf('%03d', $milli)), $format);
+
+        return date($format, $unix);
+    }
+
 }

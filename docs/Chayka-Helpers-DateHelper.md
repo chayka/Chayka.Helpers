@@ -407,3 +407,24 @@ and you need to store it in $_SESSION yourself.
 * $date **DateTime**
 
 
+
+### microTimeToStr
+
+    string Chayka\Helpers\DateHelper::microTimeToStr($microTime, $format)
+
+Output timestamp got from microtime(true)
+Using format from http://php.net/manual/ru/function.date.php
+u - microseconds
+z - milliseconds
+
+
+
+* Visibility: **public**
+* This method is **static**.
+
+
+#### Arguments
+* $microTime **mixed**
+* $format **mixed**
+
+

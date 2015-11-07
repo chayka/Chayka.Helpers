@@ -145,6 +145,24 @@ Returns resulting filename.
 
 
 
+### readDir
+
+    array Chayka\Helpers\FsHelper::readDir(string $dir, boolean|false $absPaths)
+
+Read dir contents
+
+
+
+* Visibility: **public**
+* This method is **static**.
+
+
+#### Arguments
+* $dir **string**
+* $absPaths **boolean|false**
+
+
+
 ### copy
 
     boolean Chayka\Helpers\FsHelper::copy(string $src, string $dst, integer $dstAttribs)

@@ -107,6 +107,31 @@ class FsHelper {
     }
 
     /**
+     * Read dir contents
+     *
+     * @param string $dir
+     * @param bool|false $absPaths
+     *
+     * @return array
+     */
+    public static function readDir($dir, $absPaths = false){
+        $entries = array();
+        if (is_dir($dir)) {
+            $dir = preg_replace("%/$%", '', $dir);
+            $d = dir($dir);
+            while ($file = $d->read()) {
+                if ($file == "." || $file == "..") {
+                    continue;
+                }
+                $entries[]=$absPaths?$dir.'/'.$file:$file;
+            }
+            $d->close();
+        }
+
+        return $entries;
+    }
+
+    /**
      * Copy $src (file or dir) to $dst
      *
      * @param string $src
