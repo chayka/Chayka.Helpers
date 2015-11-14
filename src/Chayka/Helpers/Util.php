@@ -63,6 +63,24 @@ class Util {
     }
 
     /**
+     * Check if current server request made using secure connection
+     *
+     * @return bool
+     */
+    public static function isHttps(){
+        return $_SERVER['HTTPS'] || $_SERVER['SERVER_PORT']  == 443;
+    }
+
+    /**
+     * Return 'http' or 'https' based on self::isHttps() check
+     *
+     * @return string
+     */
+    public static function serverProtocol(){
+        return self::isHttps() ? 'https' : 'http';
+    }
+
+    /**
      * Start session.
      */
     public static function sessionStart(){

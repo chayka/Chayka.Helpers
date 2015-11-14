@@ -70,6 +70,34 @@ Get server name from $_SERVER['SERVER_NAME'] without 'www.'
 
 
 
+### isHttps
+
+    boolean Chayka\Helpers\Util::isHttps()
+
+Check if current server request made using secure connection
+
+
+
+* Visibility: **public**
+* This method is **static**.
+
+
+
+
+### serverProtocol
+
+    string Chayka\Helpers\Util::serverProtocol()
+
+Return 'http' or 'https' based on self::isHttps() check
+
+
+
+* Visibility: **public**
+* This method is **static**.
+
+
+
+
 ### sessionStart
 
     mixed Chayka\Helpers\Util::sessionStart()
