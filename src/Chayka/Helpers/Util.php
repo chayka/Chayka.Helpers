@@ -68,7 +68,7 @@ class Util {
      * @return bool
      */
     public static function isHttps(){
-        return $_SERVER['HTTPS'] || $_SERVER['SERVER_PORT']  == 443;
+        return !empty($_SERVER['HTTPS']) || $_SERVER['SERVER_PORT']  == 443;
     }
 
     /**
