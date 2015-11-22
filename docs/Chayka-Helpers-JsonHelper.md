@@ -28,7 +28,7 @@ Methods
 
 ### encode
 
-    string Chayka\Helpers\JsonHelper::encode($value)
+    string Chayka\Helpers\JsonHelper::encode($value, boolean $singleQuotes)
 
 Encode recursively provided $value.
 
@@ -40,6 +40,24 @@ If $value or it's properties are JsonReady, packToJson() will be used.
 
 #### Arguments
 * $value **mixed**
+* $singleQuotes **boolean**
+
+
+
+### singleQuotes
+
+    string Chayka\Helpers\JsonHelper::singleQuotes(string $encodedJson)
+
+Convert json encoded string to single quotes
+
+
+
+* Visibility: **public**
+* This method is **static**.
+
+
+#### Arguments
+* $encodedJson **string**
 
 
 

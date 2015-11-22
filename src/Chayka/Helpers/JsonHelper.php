@@ -28,10 +28,26 @@ class JsonHelper {
      * If $value or it's properties are JsonReady, packToJson() will be used.
      *
      * @param $value
+     * @param bool $singleQuotes
+     *
      * @return string
      */
-    public static function encode($value) {
-        return json_encode(self::packObject($value));
+    public static function encode($value, $singleQuotes = false) {
+        $json = json_encode(self::packObject($value));
+        return $singleQuotes?self::singleQuotes($json):$json;
+    }
+
+    /**
+     * Convert json encoded string to single quotes
+     *
+     * @param string $encodedJson
+     *
+     * @return string
+     */
+    public static function singleQuotes($encodedJson){
+        $encodedJson = str_replace("'", "\'", $encodedJson);
+        $encodedJson = str_replace('"', "'", $encodedJson);
+        return $encodedJson;
     }
 
     /**
