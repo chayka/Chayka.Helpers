@@ -127,6 +127,24 @@ Returns resulting filename.
 
 
 
+### hideExtension
+
+    string Chayka\Helpers\FsHelper::hideExtension($filename)
+
+Get filename without extension
+e.g. 'readme.txt' -> 'readme'
+
+
+
+* Visibility: **public**
+* This method is **static**.
+
+
+#### Arguments
+* $filename **mixed**
+
+
+
 ### setExtensionPrefix
 
     string Chayka\Helpers\FsHelper::setExtensionPrefix(string $filename, string $prefix)

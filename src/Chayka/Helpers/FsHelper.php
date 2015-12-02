@@ -94,6 +94,17 @@ class FsHelper {
     }
 
     /**
+     * Get filename without extension
+     * e.g. 'readme.txt' -> 'readme'
+     *
+     * @param $filename
+     * @return string
+     */
+    public static function hideExtension($filename) {
+        return preg_replace('%\.([\w\d]+)$%', '', $filename);
+    }
+
+    /**
      * Prepend extension prefix.
      * Returns resulting filename.
      *
