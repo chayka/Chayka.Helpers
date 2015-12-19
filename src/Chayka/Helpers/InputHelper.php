@@ -156,6 +156,9 @@ class InputHelper {
         if(is_object($value)){
             return self::filterArray(get_object_vars($value));
         }
+        if(is_int($value) || is_float($value)){
+            return $value;
+        }
         if(!in_array($key, self::$htmlAllowed)){
             $filter = FILTER_SANITIZE_STRING;
             $options = FILTER_FLAG_NO_ENCODE_QUOTES;
