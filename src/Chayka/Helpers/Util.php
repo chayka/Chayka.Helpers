@@ -81,6 +81,20 @@ class Util {
     }
 
     /**
+     * Convert relative url to absolute if needed
+     *
+     * @param string $url
+     * @return string
+     */
+    public static function getAbsoluteUrl($url){
+        if(preg_match('%^(\w+:)\/\/%', $url)){
+            return $url;
+        }
+
+        return (Util::isHttps()?'https':'http').'://'.$_SERVER['SERVER_NAME'].$url;
+    }
+
+    /**
      * Start session.
      */
     public static function sessionStart(){

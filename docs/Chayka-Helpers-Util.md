@@ -98,6 +98,23 @@ Return 'http' or 'https' based on self::isHttps() check
 
 
 
+### getAbsoluteUrl
+
+    string Chayka\Helpers\Util::getAbsoluteUrl(string $url)
+
+Convert relative url to absolute if needed
+
+
+
+* Visibility: **public**
+* This method is **static**.
+
+
+#### Arguments
+* $url **string**
+
+
+
 ### sessionStart
 
     mixed Chayka\Helpers\Util::sessionStart()
