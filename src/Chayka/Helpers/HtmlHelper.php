@@ -59,7 +59,7 @@ class HtmlHelper {
      * @return string
      */
     public static function getHeadTitle($default = ''){
-        self::getMeta('head.title', $default);
+        return self::getMeta('head.title', $default);
     }
 
     /**
