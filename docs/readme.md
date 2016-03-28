@@ -15,5 +15,6 @@ API Index
         * [JsonReady](Chayka-Helpers-JsonReady.md)
         * [LogHelper](Chayka-Helpers-LogHelper.md)
         * [NlsHelper](Chayka-Helpers-NlsHelper.md)
+        * [RandomizerHelper](Chayka-Helpers-RandomizerHelper.md)
         * [Util](Chayka-Helpers-Util.md)
 
