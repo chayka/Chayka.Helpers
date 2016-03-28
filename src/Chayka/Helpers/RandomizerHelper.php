@@ -273,7 +273,7 @@ class RandomizerHelper{
         }
         do{
             $char = sprintf('%s %s',
-                self::$adjectives[ array_rand(self::$adjectives) ],
+                mb_convert_case(self::$adjectives[ array_rand(self::$adjectives) ], MB_CASE_TITLE, "UTF-8"),
                 self::$celebrities[ array_rand(self::$celebrities) ]);
             if($i++ > 100){
                 $char = '';
