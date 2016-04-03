@@ -183,9 +183,7 @@ class FsHelper {
      * @return int
      */
     public static function delete($path) {
-        if (is_file($path)) {
-            return unlink($path);
-        } elseif (is_dir($path)) {
+        if (is_dir($path)) {
             $path = preg_replace("%/$%", '', $path);
             $d = dir($path);
             while ($file = $d->read()) {
@@ -202,6 +200,8 @@ class FsHelper {
             if (!rmdir($path)) {
                 return 0;
             }
+        } else {
+            return unlink($path);
         }
         return 1;
     }
