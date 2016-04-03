@@ -192,10 +192,11 @@ class FsHelper {
                 if ($file == "." || $file == "..") {
                     continue;
                 }
-                if (!self::delete("$path/$file")) {
-                    $d->close();
-                    return 0;
-                }
+                self::delete("$path/$file");
+//                if (!self::delete("$path/$file")) {
+//                    $d->close();
+//                    return 0;
+//                }
             }
             $d->close();
             if (!rmdir($path)) {
