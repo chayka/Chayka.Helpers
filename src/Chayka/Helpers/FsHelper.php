@@ -180,7 +180,7 @@ class FsHelper {
      * Delete $path.
      *
      * @param $path
-     * @return int
+     * @return bool
      */
     public static function delete($path) {
         if (is_dir($path)) {
@@ -191,19 +191,12 @@ class FsHelper {
                     continue;
                 }
                 self::delete("$path/$file");
-//                if (!self::delete("$path/$file")) {
-//                    $d->close();
-//                    return 0;
-//                }
             }
             $d->close();
-            if (!rmdir($path)) {
-                return 0;
-            }
+            return rmdir($path);
         } else {
             return unlink($path);
         }
-        return 1;
     }
 
     /**
