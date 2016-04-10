@@ -128,13 +128,13 @@ class FsHelper {
     public static function readDir($dir, $absPaths = false){
         $entries = array();
         if (is_dir($dir)) {
-            $dir = preg_replace("%/$%", '', $dir);
-            $d = dir($dir);
+            $dirSlashed = preg_replace("%/$%", '', $dir).'/';
+            $d = dir($dirSlashed);
             while ($file = $d->read()) {
                 if ($file == "." || $file == "..") {
                     continue;
                 }
-                $entries[]=$absPaths?$dir.'/'.$file:$file;
+                $entries[]=$absPaths?$dirSlashed.$file:$file;
             }
             $d->close();
         }

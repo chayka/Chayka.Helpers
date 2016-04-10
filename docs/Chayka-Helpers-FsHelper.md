@@ -202,7 +202,7 @@ Copy $src (file or dir) to $dst
 
 ### delete
 
-    integer Chayka\Helpers\FsHelper::delete($path)
+    boolean Chayka\Helpers\FsHelper::delete($path)
 
 Delete $path.
 

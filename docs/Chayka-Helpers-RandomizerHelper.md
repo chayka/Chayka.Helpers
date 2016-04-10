@@ -62,3 +62,21 @@ A list of already existing celebrities can be provided to maintain uniqueness.
 * $existing **array**
 
 
+
+### getRandomString
+
+    string Chayka\Helpers\RandomizerHelper::getRandomString(integer $length, string $characters)
+
+Get random string consisting of provided characters
+
+
+
+* Visibility: **public**
+* This method is **static**.
+
+
+#### Arguments
+* $length **integer**
+* $characters **string**
+
+
