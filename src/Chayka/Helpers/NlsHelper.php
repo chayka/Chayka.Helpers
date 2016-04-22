@@ -59,7 +59,7 @@ class NlsHelper {
      */
     public static function setLocale($locale = 'auto'){
         if('auto' == $locale){
-            $locale = Locale::acceptFromHttp($_SERVER['HTTP_ACCEPT_LANGUAGE']);
+            $locale = Locale::acceptFromHttp(Util::getItem($_SERVER, 'HTTP_ACCEPT_LANGUAGE', 'en-US'));
         }
         Locale::setDefault($locale);
         self::$locale = Locale::getDefault();
