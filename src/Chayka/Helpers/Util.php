@@ -95,7 +95,7 @@ class Util {
     }
 
     /**
-     * Start session.
+     * Start session (if headers are not sent).
      */
     public static function sessionStart(){
         if(!session_id() && !headers_sent()){

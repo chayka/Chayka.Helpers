@@ -119,7 +119,7 @@ Convert relative url to absolute if needed
 
     mixed Chayka\Helpers\Util::sessionStart()
 
-Start session.
+Start session (if headers are not sent).
 
 
 
