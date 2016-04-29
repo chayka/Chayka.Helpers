@@ -10,7 +10,7 @@ Class JsonHelper wraps all the api output into an envelope
 }
 
 Payload is scanned recursively for JsonReady interface instances,
-so that json representaion of the object can be customized
+so that json representation of the object can be customized
 
 
 * Class name: JsonHelper
@@ -20,10 +20,41 @@ so that json representaion of the object can be customized
 
 
 
+Properties
+----------
+
+
+### $dieOnRespond
+
+    protected boolean $dieOnRespond = true
+
+If true outputs Json response and dies (default behavior)
+
+
+
+* Visibility: **protected**
+* This property is **static**.
 
 
 Methods
 -------
+
+
+### dieOnRespond
+
+    mixed Chayka\Helpers\JsonHelper::dieOnRespond(boolean $die)
+
+Enable or disable 'die on respond' mode.
+
+Mainly needed to disable for testing purposes.
+
+* Visibility: **public**
+* This method is **static**.
+
+
+#### Arguments
+* $die **boolean**
+
 
 
 ### encode

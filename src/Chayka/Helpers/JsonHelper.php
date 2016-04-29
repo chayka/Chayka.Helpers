@@ -17,11 +17,27 @@ namespace Chayka\Helpers;
  * }
  *
  * Payload is scanned recursively for JsonReady interface instances,
- * so that json representaion of the object can be customized
+ * so that json representation of the object can be customized
  *
  * @package Chayka\Helpers
  */
 class JsonHelper {
+
+    /**
+     * If true outputs Json response and dies (default behavior)
+     * @var bool
+     */
+    protected static $dieOnRespond = true;
+
+    /**
+     * Enable or disable 'die on respond' mode.
+     * Mainly needed to disable for testing purposes.
+     *
+     * @param bool $die
+     */
+    public static function dieOnRespond($die = true){
+        self::$dieOnRespond = $die;
+    }
 
     /**
      * Encode recursively provided $value.
@@ -45,7 +61,7 @@ class JsonHelper {
      * @return string
      */
     public static function singleQuotes($encodedJson){
-        $encodedJson = str_replace("'", "\'", $encodedJson);
+        $encodedJson = str_replace("'", "\\'", $encodedJson);
         $encodedJson = str_replace('"', "'", $encodedJson);
         return $encodedJson;
     }
@@ -107,7 +123,12 @@ class JsonHelper {
      * @param string $message
      */
     public static function respond($payload = '', $code = 0, $message = '') {
-        return die(self::packResponse($payload, $code, $message));
+        $response = self::packResponse($payload, $code, $message);
+        if(self::$dieOnRespond){
+            die($response);
+        }else{
+            echo $response;
+        }
     }
 
     /**
