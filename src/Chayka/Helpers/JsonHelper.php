@@ -170,7 +170,13 @@ class JsonHelper {
      * @param int $httpResponseCode
      */
     public static function respondError($message = '', $code = 1, $payload = null, $httpResponseCode = 400){
-        HttpHeaderHelper::setResponseCode($httpResponseCode);
+        if(self::$dieOnRespond || !headers_sent()){
+            /**
+             * dieOnRespond = false usually on debug mode for unit testing
+             * in this mode we need to suppress 'headers sent' errors
+             */
+            HttpHeaderHelper::setResponseCode($httpResponseCode);
+        }
         self::respond($payload, $code, $message);
     }
 
