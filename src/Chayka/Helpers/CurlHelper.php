@@ -17,8 +17,10 @@ class CurlHelper {
 
     /**
      * Prepares curl handle on given url
+     * If params value is array http_build_query is run upon it.
+     *
      * @param string $url given URL
-     * @param mixed $params data to send
+     * @param array|string $params data to send
      * @param integer $timeout in seconds
      * @return resource curl handle
      */
@@ -27,7 +29,7 @@ class CurlHelper {
         curl_setopt($ch, CURLOPT_URL, $url);
         if(!empty ($params)){
             curl_setopt($ch, CURLOPT_POST, 1);
-            $request = http_build_query($params, '', '&');
+            $request = is_array($params)?http_build_query($params, '', '&'):$params;
             curl_setopt($ch, CURLOPT_POSTFIELDS, $request);
         }
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -40,7 +42,7 @@ class CurlHelper {
      * Perform request using prepared handle.
      * If request returns json function returns decoded response (assoc array)
      * @param $ch
-     * @return string/array
+     * @return string|array
      */
     public static function performRequest($ch){
         $res = curl_exec($ch);
@@ -51,10 +53,11 @@ class CurlHelper {
 
     /**
      * Sends post request on given url and returns response
+     *
      * @param string $url given URL
-     * @param array $params to send
+     * @param array|string $params to send
      * @param integer $timeout in seconds
-     * @return string response
+     * @return string|array response
      */
     public static function post($url, $params=array(), $timeout=60) {
         $ch = self::prepareRequest($url, $params, $timeout);
@@ -63,14 +66,31 @@ class CurlHelper {
 
     /**
      * Sends get request on given url and returns response
+     *
      * @param string $url given URL
      * @param array $params to send
      * @param integer $timeout in seconds
-     * @return string response
+     * @return string|array response
      */
     public static function get($url, $params=array(), $timeout=60) {
         $url.='?'.http_build_query($params, '', '&');
         $ch = self::prepareRequest($url, null, $timeout);
+        return self::performRequest($ch);
+    }
+
+    /**
+     * Sends json payload via post request and returns response.
+     * Payload is being encoded by JsonHelper::encode() beforehand.
+     *
+     * @param $url
+     * @param $payload
+     * @param int $timeout
+     *
+     * @return string|array
+     */
+    public static function postJson($url, $payload, $timeout=60){
+        $json = JsonHelper::encode($payload);
+        $ch = self::prepareRequest($url, $json, $timeout);
         return self::performRequest($ch);
     }
 
