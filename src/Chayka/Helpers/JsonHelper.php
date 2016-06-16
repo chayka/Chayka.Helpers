@@ -115,6 +115,21 @@ class JsonHelper {
     }
 
     /**
+     * Set http response code
+     *
+     * @param $code
+     */
+    public static function setResponseCode($code){
+        if(self::$dieOnRespond && !headers_sent()){
+            /**
+             * dieOnRespond = false usually on debug mode for unit testing
+             * in this mode we need to suppress 'headers sent' errors
+             */
+            HttpHeaderHelper::setResponseCode($code);
+        }
+    }
+
+    /**
      * Wrap json response into {'payload': ..., 'code': ..., 'message': ...} envelope.
      * And then die() it.
      *
@@ -140,7 +155,7 @@ class JsonHelper {
      * @param string $code
      */
     public static function respondException($e, $code = ''){
-        HttpHeaderHelper::setResponseCode(500);
+        self::setResponseCode(500);
         self::respond($e, $code ? $code :$e->getCode(), $e->getMessage());
     }
 
@@ -155,7 +170,7 @@ class JsonHelper {
      * @param int $httpResponseCode
      */
     public static function respondSuccess($message = '', $payload = null, $code = 0, $httpResponseCode = 200){
-        HttpHeaderHelper::setResponseCode($httpResponseCode);
+        self::setResponseCode($httpResponseCode);
         self::respond($payload, $code, $message);
     }
 
@@ -170,13 +185,7 @@ class JsonHelper {
      * @param int $httpResponseCode
      */
     public static function respondError($message = '', $code = 1, $payload = null, $httpResponseCode = 400){
-        if(self::$dieOnRespond || !headers_sent()){
-            /**
-             * dieOnRespond = false usually on debug mode for unit testing
-             * in this mode we need to suppress 'headers sent' errors
-             */
-            HttpHeaderHelper::setResponseCode($httpResponseCode);
-        }
+        self::setResponseCode($httpResponseCode);
         self::respond($payload, $code, $message);
     }
 
@@ -190,7 +199,7 @@ class JsonHelper {
      * @param int $httpResponseCode
      */
     public static function respondErrors($errors, $payload = null, $httpResponseCode = 400){
-        HttpHeaderHelper::setResponseCode($httpResponseCode);
+        self::setResponseCode($httpResponseCode);
         $count = count($errors);
         if($count){
             self::respond($payload, 'mass_errors', $errors);

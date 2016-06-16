@@ -21,9 +21,10 @@ Methods
 
 ### prepareRequest
 
-    resource Chayka\Helpers\CurlHelper::prepareRequest(string $url, mixed $params, integer $timeout)
+    resource Chayka\Helpers\CurlHelper::prepareRequest(string $url, array|string $params, integer $timeout)
 
 Prepares curl handle on given url
+If params value is array http_build_query is run upon it.
 
 
 
@@ -33,14 +34,14 @@ Prepares curl handle on given url
 
 #### Arguments
 * $url **string** - &lt;p&gt;given URL&lt;/p&gt;
-* $params **mixed** - &lt;p&gt;data to send&lt;/p&gt;
+* $params **array|string** - &lt;p&gt;data to send&lt;/p&gt;
 * $timeout **integer** - &lt;p&gt;in seconds&lt;/p&gt;
 
 
 
 ### performRequest
 
-    \Chayka\Helpers\string/array Chayka\Helpers\CurlHelper::performRequest($ch)
+    string|array Chayka\Helpers\CurlHelper::performRequest($ch)
 
 Perform request using prepared handle.
 
@@ -57,7 +58,7 @@ If request returns json function returns decoded response (assoc array)
 
 ### post
 
-    string Chayka\Helpers\CurlHelper::post(string $url, array $params, integer $timeout)
+    string|array Chayka\Helpers\CurlHelper::post(string $url, array|string $params, integer $timeout)
 
 Sends post request on given url and returns response
 
@@ -69,14 +70,14 @@ Sends post request on given url and returns response
 
 #### Arguments
 * $url **string** - &lt;p&gt;given URL&lt;/p&gt;
-* $params **array** - &lt;p&gt;to send&lt;/p&gt;
+* $params **array|string** - &lt;p&gt;to send&lt;/p&gt;
 * $timeout **integer** - &lt;p&gt;in seconds&lt;/p&gt;
 
 
 
 ### get
 
-    string Chayka\Helpers\CurlHelper::get(string $url, array $params, integer $timeout)
+    string|array Chayka\Helpers\CurlHelper::get(string $url, array $params, integer $timeout)
 
 Sends get request on given url and returns response
 
@@ -90,6 +91,25 @@ Sends get request on given url and returns response
 * $url **string** - &lt;p&gt;given URL&lt;/p&gt;
 * $params **array** - &lt;p&gt;to send&lt;/p&gt;
 * $timeout **integer** - &lt;p&gt;in seconds&lt;/p&gt;
+
+
+
+### postJson
+
+    string|array Chayka\Helpers\CurlHelper::postJson($url, $payload, integer $timeout)
+
+Sends json payload via post request and returns response.
+
+Payload is being encoded by JsonHelper::encode() beforehand.
+
+* Visibility: **public**
+* This method is **static**.
+
+
+#### Arguments
+* $url **mixed**
+* $payload **mixed**
+* $timeout **integer**
 
 
 

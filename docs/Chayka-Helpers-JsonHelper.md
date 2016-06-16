@@ -128,6 +128,23 @@ Wrap json response into {'payload': .
 
 
 
+### setResponseCode
+
+    mixed Chayka\Helpers\JsonHelper::setResponseCode($code)
+
+Set http response code
+
+
+
+* Visibility: **public**
+* This method is **static**.
+
+
+#### Arguments
+* $code **mixed**
+
+
+
 ### respond
 
     mixed Chayka\Helpers\JsonHelper::respond(string $payload, integer $code, string $message)
