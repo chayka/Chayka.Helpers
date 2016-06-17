@@ -289,6 +289,40 @@ class RandomizerHelper{
     }
 
     /**
+     * Get random unique Celebrity name slug.
+     * A list of already existing celebrities can be provided to maintain uniqueness.
+     *
+     * @param string $separator
+     * @param array $existing
+     *
+     * @return string
+     */
+    public static function getRandomCelebritySlug($separator = '-', &$existing = []){
+        $i = 0;
+        if(!$existing){
+            $existing = [];
+        }
+        do{
+            $char = sprintf('%s %s',
+                self::$adjectives[ array_rand(self::$adjectives) ],
+                self::$celebrities[ array_rand(self::$celebrities) ]
+            );
+            if($i++ > 100){
+                $char = '';
+                break;
+            }
+            $char = mb_convert_case($char, MB_CASE_LOWER, "UTF-8");
+            $char = preg_replace('/[^\w\d]+/u', $separator, $char);
+        }while(array_search($char, $existing) !== false);
+
+        if($char){
+            $existing[] = $char;
+        }
+
+        return $char;
+    }
+
+    /**
      * Get random string consisting of provided characters
      * 
      * @param int $length

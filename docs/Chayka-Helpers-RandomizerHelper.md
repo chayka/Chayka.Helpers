@@ -63,6 +63,24 @@ A list of already existing celebrities can be provided to maintain uniqueness.
 
 
 
+### getRandomCelebritySlug
+
+    string Chayka\Helpers\RandomizerHelper::getRandomCelebritySlug(string $separator, array $existing)
+
+Get random unique Celebrity name slug.
+
+A list of already existing celebrities can be provided to maintain uniqueness.
+
+* Visibility: **public**
+* This method is **static**.
+
+
+#### Arguments
+* $separator **string**
+* $existing **array**
+
+
+
 ### getRandomString
 
     string Chayka\Helpers\RandomizerHelper::getRandomString(integer $length, string $characters)
