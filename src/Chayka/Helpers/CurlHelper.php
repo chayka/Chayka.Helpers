@@ -95,6 +95,23 @@ class CurlHelper {
     }
 
     /**
+     * Encode a file to upload
+     *
+     * @param $filename
+     * @param string $mimeType
+     * @param string $postName
+     *
+     * @return \CURLFile|string
+     */
+    public static function fileToPost($filename, $mimeType = '', $postName = ''){
+        if(function_exists('curl_file_create')){
+            return curl_file_create($filename, $mimeType, $postName);
+        }
+
+        return "@$filename;filename=" . ($postName ? '' : basename($filename)) . ($mimeType ? ";type=$mimeType" : '');
+    }
+
+    /**
      * Download file from $url and store it to $filename.
      * If params are used they are POSTed.
      * Returns size of downloaded file.
