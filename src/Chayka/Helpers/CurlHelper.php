@@ -29,8 +29,8 @@ class CurlHelper {
         curl_setopt($ch, CURLOPT_URL, $url);
         if(!empty ($params)){
             curl_setopt($ch, CURLOPT_POST, 1);
-            $request = is_array($params)?http_build_query($params, '', '&'):$params;
-            curl_setopt($ch, CURLOPT_POSTFIELDS, $request);
+//            $request = is_array($params)?http_build_query($params, '', '&'):$params;
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $params);
         }
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_TIMEOUT, $timeout);
