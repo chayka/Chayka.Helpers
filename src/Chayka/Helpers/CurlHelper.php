@@ -91,7 +91,9 @@ class CurlHelper {
     public static function postJson($url, $payload, $timeout=60){
         $json = JsonHelper::encode($payload);
         $ch = self::prepareRequest($url, $json, $timeout);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
         return self::performRequest($ch);
+        
     }
 
     /**
