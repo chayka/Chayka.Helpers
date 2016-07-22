@@ -52,10 +52,14 @@ class FsHelper {
         }
         
         $fp = fopen($filename, 'ab');
-        $n = fwrite($fp, $data);
-        fclose($fp);
+        if($fp){
+            $n = fwrite($fp, $data);
+            fclose($fp);
+            return $n;
 
-        return $n;
+        }
+
+        return 0;
     }
 
     /**
