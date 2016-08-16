@@ -7,8 +7,6 @@
 
 namespace Chayka\Helpers;
 
-use \Locale;
-
 /**
  * Class NlsHelper provides mechanism for National Language Support.
  *
@@ -24,7 +22,7 @@ class NlsHelper {
     protected static $dictionary = array();
 
     /**
-     * Locale identifier string
+     * String identifier string
      *
      * @var string
      */
@@ -59,10 +57,11 @@ class NlsHelper {
      */
     public static function setLocale($locale = 'auto'){
         if('auto' == $locale){
-            $locale = Locale::acceptFromHttp(Util::getItem($_SERVER, 'HTTP_ACCEPT_LANGUAGE', 'en-US'));
+            $locale = Util::getItem($_SERVER, 'HTTP_ACCEPT_LANGUAGE', 'en-US');
         }
-        Locale::setDefault($locale);
-        self::$locale = Locale::getDefault();
+//        Locale::setDefault($locale);
+//        self::$locale = Locale::getDefault();
+        self::$locale = $locale;
     }
 
     /**
@@ -93,7 +92,7 @@ class NlsHelper {
      */
     public static function getLang() {
         if (!self::$lang) {
-            self::$lang = Locale::getPrimaryLanguage(self::getLocale());
+            list(self::$lang, $country) = sscanf(self::getLocale(), '%2s-%2s');
         }
         return self::$lang;
     }

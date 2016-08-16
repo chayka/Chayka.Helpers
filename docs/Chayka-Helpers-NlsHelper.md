@@ -33,7 +33,7 @@ Hash map for translations
 
     protected string $locale
 
-Locale identifier string
+String identifier string
 
 
 

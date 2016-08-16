@@ -113,6 +113,25 @@ Payload is being encoded by JsonHelper::encode() beforehand.
 
 
 
+### fileToPost
+
+    \CURLFile|string Chayka\Helpers\CurlHelper::fileToPost($filename, string $mimeType, string $postName)
+
+Encode a file to upload
+
+
+
+* Visibility: **public**
+* This method is **static**.
+
+
+#### Arguments
+* $filename **mixed**
+* $mimeType **string**
+* $postName **string**
+
+
+
 ### download
 
     integer Chayka\Helpers\CurlHelper::download(string $filename, string $url, array $params, integer $timeout)
