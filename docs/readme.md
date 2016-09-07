@@ -5,6 +5,7 @@ API Index
     * Chayka\Helpers
         * [CurlHelper](Chayka-Helpers-CurlHelper.md)
         * [DateHelper](Chayka-Helpers-DateHelper.md)
+        * [EncryptionHelper](Chayka-Helpers-EncryptionHelper.md)
         * [FsHelper](Chayka-Helpers-FsHelper.md)
         * [HtmlHelper](Chayka-Helpers-HtmlHelper.md)
         * [HttpHeaderHelper](Chayka-Helpers-HttpHeaderHelper.md)
